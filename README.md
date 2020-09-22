@@ -127,7 +127,7 @@ neighborhoods
 * Sunlight range is searched
 * The request is answered with the sunlight range
 
-#### Examples of calls to endpoints...
+# How to test the REST API
 
 * **_init_**
 
