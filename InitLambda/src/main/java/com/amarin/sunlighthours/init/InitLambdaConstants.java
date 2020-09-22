@@ -10,7 +10,7 @@ public interface InitLambdaConstants {
 
     public static final String DYNAMODB_TABLE_CONFIG_NAME = "badi-challenge-config";
 
-    public static final String RESPONSE_OK_MSG = "Ok!";
+    public static final String RESPONSE_OK_MSG = "City creation accepted";
     public static final String RESPONSE_INPUT_VALUES_ERROR_MSG = "Invalid input data";
     public static final String RESPONSE_INPUT_VALUES_ERROR_CODE = "400";
     public static final String RESPONSE_INIT_ERROR_MSG = "Cannot init";
