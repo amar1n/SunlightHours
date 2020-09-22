@@ -83,6 +83,18 @@ public class CreateLambdaHandler implements RequestStreamHandler {
     }
 
     private void deleteCityTables() throws Exception {
+        boolean bFlag = true;
+        Table cityTable = null;
+        try {
+            cityTable = dynamoDB.getTable(DYNAMODB_TABLE_CITY_NAME);
+            cityTable.describe();
+        } catch (ResourceNotFoundException rnfe) {
+            bFlag = false;
+            // Ocurre cuando la tabla no existe... así que no pasa nada
+        }
+
+        if (!bFlag) { return; }
+
         ScanRequest scanRequest = new ScanRequest().withTableName(DYNAMODB_TABLE_CITY_NAME);
         ScanResult result = dynamoDBClient.scan(scanRequest);
 
@@ -113,25 +125,19 @@ public class CreateLambdaHandler implements RequestStreamHandler {
                     e.printStackTrace();
                 }
             });
-            tasks.add(() -> {
-                try {
-                    Table table = dynamoDB.getTable(DYNAMODB_TABLE_CITY_NAME);
-                    table.describe();
-
-                    table.delete();
-                    table.waitForDelete();
-                } catch (ResourceNotFoundException rnfe) {
-                    // Ocurre cuando la tabla no existe... así que no pasa nada
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
         }
         ExecutorService es = Executors.newCachedThreadPool();
 
         CompletableFuture<?>[] futures = tasks.stream().map(task -> CompletableFuture.runAsync(task, es)).toArray(CompletableFuture[]::new);
         CompletableFuture.allOf(futures).join();
         es.shutdown();
+
+        try {
+            cityTable.delete();
+            cityTable.waitForDelete();
+        } catch (ResourceNotFoundException rnfe) {
+            // Ocurre cuando la tabla no existe... así que no pasa nada
+        }
     }
 
     private Table createCityTable() throws Exception {
