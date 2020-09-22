@@ -113,22 +113,25 @@ public class CreateLambdaHandler implements RequestStreamHandler {
                     e.printStackTrace();
                 }
             });
+            tasks.add(() -> {
+                try {
+                    Table table = dynamoDB.getTable(DYNAMODB_TABLE_CITY_NAME);
+                    table.describe();
+
+                    table.delete();
+                    table.waitForDelete();
+                } catch (ResourceNotFoundException rnfe) {
+                    // Ocurre cuando la tabla no existe... así que no pasa nada
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
         }
         ExecutorService es = Executors.newCachedThreadPool();
 
         CompletableFuture<?>[] futures = tasks.stream().map(task -> CompletableFuture.runAsync(task, es)).toArray(CompletableFuture[]::new);
         CompletableFuture.allOf(futures).join();
         es.shutdown();
-
-        try {
-            Table table = dynamoDB.getTable(DYNAMODB_TABLE_CITY_NAME);
-            table.describe();
-
-            table.delete();
-            table.waitForDelete();
-        } catch (ResourceNotFoundException rnfe) {
-            // Ocurre cuando la tabla no existe... así que no pasa nada
-        }
     }
 
     private Table createCityTable() throws Exception {
