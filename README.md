@@ -1,6 +1,4 @@
-# Challenge
-
-#### Sunlight hours
+# Sunlight hours
 
 A new feature has been requested for our room listings in future Barcelona: we want to display
 the sunlight hours that a given apartment receives in a day. To ensure our announced sunlight
@@ -63,7 +61,7 @@ beyond!
 The solution was implemented by developing a Serverless API With DynamoDB, AWS Lambda, and API Gateway.
   
 The technologies used were...
-* AWS Lambda for running Java 8 code without provisioning servers
+* AWS Lambdas for running Java 8 code without provisioning servers
 * AWS API Gateway, API Keys and Usage Plans for Serverless REST API
 * AWS IAM to protect access to AWS services and resources used by the Lambda functions
 * AWS DynamoDB for a managed NoSQL database
@@ -71,14 +69,22 @@ The technologies used were...
 * JSON Schema Validator from everit-org for validation of input data
 * Gson to serialize and deserialize Java objects to JSON
 * Java 8 multithreading for calculating the ranges with sunlight
+* Java 8 Executor framework for the parallel processing of tasks such as the creation and deletion of NoSQL tables and 
+to perform the calculations of the hourly ranges with light in each neighborhood
 * Maven and IntelliJ Idea
 
 When an **init** request is received...
 * Input data is validated
 * It is verified that there is no other **init** process in progress
-* The input data is stored in a NoSQL table
-* The sunlight range calculation process starts in parallel
+* Access to subsequent **init** calls is blocked
+* A Lambda function (**calculateSunlightHours**) is invoked asynchronously to perform the calculations of the sunlight hours in the indicated 
+neighborhoods
 * The request is answered with OK
+
+When **calculateSunlightHours** is invoked...
+* All tables used by the **_old city_** are deleted in parallel
+* For each neighborhood the starting and ending ranges are calculated separately. All this is done in parallel (by neighborhood, start and end)
+* All tables used by the **_new city_** are created in parallel
 
 When a request for **getSunlightHours** is received...
 * Input data is validated
@@ -92,7 +98,7 @@ When a request for **getSunlightHours** is received...
 
 curl --location --request POST 'https://badi.albertomarin.info/challenge/init' \
 --header 'Content-Type: application/json' \
---header 'x-api-key: ASK-ME!!!' \
+--header 'x-api-key: ---ASK-TO-ALBERTO-MARIN---' \
 --data-raw '[
   {
     "neighborhood": "Santa Mónica",
@@ -110,4 +116,4 @@ curl --location --request POST 'https://badi.albertomarin.info/challenge/init' \
 * **_getSunlightHours_**
 
 curl --location --request GET 'https://badi.albertomarin.info/challenge/getsunlighthours?neighborhood_name=POBLENOU&building_name=01&apartment_number=4' \
---header 'x-api-key: ASK-ME'
+--header 'x-api-key: ---ASK-TO-ALBERTO-MARIN---'
