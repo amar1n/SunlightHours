@@ -76,7 +76,7 @@ beyond!
 * First I initialize all the apartments with full light, that is, from 08:14:00 until 17:25:00
 * Then I go through quadrant X second by second, from point A to point B, analyzing all the buildings
 * In a second given, for each building, I get the buildings affected by its shadow (which will be on its right) and for each of them I add a second to the starting range for those apartments that have shadow
-* Then I perform the same solution in quadrant Y, going from point C to point D and when it corresponds, I rest a second at the end of the sunlight range of the affected apartment
+* Then I perform the same solution in quadrant Y, going from point C to point D and when it corresponds, I substract a second at the end of the sunlight range of the affected apartment
 * I optimize the search for buildings affected by the shadow of another, based on their heights
 
 #### Formulas used
@@ -95,7 +95,7 @@ The solution was implemented by developing a Serverless API With DynamoDB, AWS L
 
 ![alt text](https://github.com/amar1n/SunlightHours/raw/master/SunlightHours.png "Solution")
 
-#### The technologies used were...
+#### Technologies used
 * AWS Lambdas for running Java 8 code without provisioning servers
 * AWS API Gateway, API Keys and Usage Plans for Serverless REST API
 * AWS IAM to protect access to AWS services and resources used by the Lambda functions
@@ -126,6 +126,12 @@ neighborhoods
 * It is verified that the sunlight range calculation process has finished
 * Sunlight range is searched
 * The request is answered with the sunlight range
+
+#### Tables used
+* **badi-challenge-city**, to store the definition of the city
+* **badi-challenge-config**, to manage the data state
+* **BEGINS_aaa**, to store the sun beginnings of a neighborhood. Each row will be an apartment, so the key is a composition of building with apartment
+* **ENDS_aaa**, to store the sun ends of a neighborhood. Each row will be an apartment, so the key is a composition of building with apartment
 
 # How to test the REST API
 
