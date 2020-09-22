@@ -58,11 +58,11 @@ beyond!
 
 # Solution
 
-The solution was implemented by developing a Serverless API With DynamoDB, AWS Lambda, and API Gateway.
+The solution was implemented by developing a Serverless API With DynamoDB, AWS Lambda, and API Gateway
 
 ![alt text](https://github.com/amar1n/SunlightHours/raw/master/SunlightHours.png "Solution")
 
-The technologies used were...
+#### The technologies used were...
 * AWS Lambdas for running Java 8 code without provisioning servers
 * AWS API Gateway, API Keys and Usage Plans for Serverless REST API
 * AWS IAM to protect access to AWS services and resources used by the Lambda functions
@@ -70,12 +70,12 @@ The technologies used were...
 * AWS Route 53 to set up a custom domain name for the REST API
 * JSON Schema Validator from everit-org for validation of input data
 * Gson to serialize and deserialize Java objects to JSON
-* Java 8 multithreading for calculating the ranges with sunlight
+* Java 8 multithreading for calculating the sunlight ranges
 * Java 8 Executor framework for the parallel processing of tasks such as the creation and deletion of NoSQL tables and 
-to perform the calculations of the hourly ranges with light in each neighborhood
+to perform the calculations of the sunlight ranges in each neighborhood
 * Maven and IntelliJ Idea
 
-When an **init** request is received...
+#### When an **init** request is received...
 * Input data is validated
 * It is verified that there is no other **init** process in progress
 * Access to subsequent **init** calls is blocked
@@ -83,12 +83,12 @@ When an **init** request is received...
 neighborhoods
 * The request is answered with OK
 
-When **calculateSunlightHours** is invoked...
+#### When **calculateSunlightHours** is invoked...
 * All tables used by the **_old city_** are deleted in parallel
 * For each neighborhood the starting and ending ranges are calculated separately. All this is done in parallel (by neighborhood, start and end)
 * All tables used by the **_new city_** are created in parallel
 
-When a request for **getSunlightHours** is received...
+#### When a request for **getSunlightHours** is received...
 * Input data is validated
 * It is verified that the sunlight range calculation process has finished
 * Sunlight range is searched
