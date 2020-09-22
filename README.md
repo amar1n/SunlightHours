@@ -56,9 +56,42 @@ beyond!
 ---
 ---
 
-# Solution
+# Functional solution
 
-The solution was implemented by developing a Serverless API With DynamoDB, AWS Lambda, and API Gateway
+![alt text](https://github.com/amar1n/SunlightHours/raw/master/Axis.png "Solution")
+
+#### Assumptions
+* The sun is a point of light in infinity
+* There are no mountains
+* It's a two-dimensional problem
+* Sunrise and sunset are at 0° and 180° respectively
+* I don't take into account the inclination of the earth in order to align the celestial grid with the terrestrial one. So when the sun is at its highest point, it will correspond to the zenith (90° of inclination with respect to the earth)
+* The sun from 08:13:59 to 17:25:01 travels 180 degrees
+* At 08:13:59 there is no sun, because the angle is 0
+* At 17:25:01 there is no sun, because the angle is 180
+* The zenith occurs at 12:49:30
+* It is understood that the distance reported in each building corresponds to the distance at which the next building is on its right
+
+#### Explanation
+* First I initialize all the apartments with full light, that is, from 08:14:00 until 17:25:00
+* Then I go through quadrant X second by second, from point A to point B, analyzing all the buildings
+* In a second given, for each building, I get the buildings affected by its shadow (which will be on its right) and for each of them I add a second to the starting range for those apartments that have shadow
+* Then I perform the same solution in quadrant Y, going from point C to point D and when it corresponds, I rest a second at the end of the sunlight range of the affected apartment
+* I optimize the search for buildings affected by the shadow of another, based on their heights
+
+#### Formulas used
+* Sun speed
+> total_angle / total_time => 180 / 33062 => 0.005444316738249
+* Sun angle (alfa)
+> In X = sun_speed * elapsed_seconds  
+> In Y = 180 - (sun_speed * elapsed_seconds)
+* Shadow length
+> building_height * cotangent(alfa)
+* Shadow height in one point
+> (shadow_length - distance) * tanget(alfa)
+
+# Technical solution
+The solution was implemented by developing a Serverless API With DynamoDB, AWS Lambda, and API Gateway  
 
 ![alt text](https://github.com/amar1n/SunlightHours/raw/master/SunlightHours.png "Solution")
 
