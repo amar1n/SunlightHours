@@ -59,7 +59,9 @@ beyond!
 # Solution
 
 The solution was implemented by developing a Serverless API With DynamoDB, AWS Lambda, and API Gateway.
-  
+
+![alt text](https://github.com/amar1n/SunlightHours/raw/master/SunlightHours.png "Solution")
+
 The technologies used were...
 * AWS Lambdas for running Java 8 code without provisioning servers
 * AWS API Gateway, API Keys and Usage Plans for Serverless REST API
