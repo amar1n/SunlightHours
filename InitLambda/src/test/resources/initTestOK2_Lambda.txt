@@ -1,0 +1,1 @@
+{"body": "[{\"neighborhood\": \"Santa Mónica\",\"apartments_height\": 2,\"buildings\": [{\"name\": \"Edif. 1\",\"apartments_count\": 8,\"distance\": 15.4},{\"name\": \"Edif. 2\",\"apartments_count\": 4,\"distance\": 15.4},{\"name\": \"Edif. 3\",\"apartments_count\": 7,\"distance\": 15.4}]}]"}

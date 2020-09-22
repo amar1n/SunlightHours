@@ -1,0 +1,16 @@
+{
+  "neighborhood": "POBLENOU",
+  "apartments_height": 2.0,
+  "buildings": [
+    {
+      "name": "Aticco",
+      "apartments_count": 8,
+      "distance": 15.4
+    },
+    {
+      "name": "01",
+      "apartments_count": 4,
+      "distance": 15.4
+    }
+  ]
+}

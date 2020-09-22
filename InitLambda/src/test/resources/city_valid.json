@@ -1,0 +1,34 @@
+[
+  {
+    "neighborhood": "POBLENOU",
+    "apartments_height": 2.0,
+    "buildings": [
+      {
+        "name": "Aticco",
+        "apartments_count": 8,
+        "distance": 15.4
+      },
+      {
+        "name": "01",
+        "apartments_count": 4,
+        "distance": 15.4
+      }
+    ]
+  },
+  {
+    "neighborhood": "GRACIA",
+    "apartments_height": 2.5,
+    "buildings": [
+      {
+        "name": "CEM",
+        "apartments_count": 7,
+        "distance": 15.4
+      },
+      {
+        "name": "30",
+        "apartments_count": 1,
+        "distance": 15.4
+      }
+    ]
+  }
+]

@@ -1,0 +1,182 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "array",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": [],
+  "examples": [
+    [
+      {
+        "neighborhood": "POBLENOU",
+        "apartments_height": 2.0,
+        "buildings": [
+          {
+            "name": "Aticco",
+            "apartments_count": 8,
+            "distance": 15.4
+          },
+          {
+            "name": "01",
+            "apartments_count": 4,
+            "distance": 15.4
+          }
+        ]
+      },
+      {
+        "neighborhood": "GRACIA",
+        "apartments_height": 2.5,
+        "buildings": [
+          {
+            "name": "CEM",
+            "apartments_count": 7,
+            "distance": 15.4
+          },
+          {
+            "name": "30",
+            "apartments_count": 1,
+            "distance": 15.4
+          }
+        ]
+      }
+    ]
+  ],
+  "additionalItems": true,
+  "items": {
+    "$id": "#/items",
+    "anyOf": [
+      {
+        "$id": "#/items/anyOf/0",
+        "type": "object",
+        "title": "The first anyOf schema",
+        "description": "An explanation about the purpose of this instance.",
+        "default": {},
+        "examples": [
+          {
+            "neighborhood": "POBLENOU",
+            "apartments_height": 2.0,
+            "buildings": [
+              {
+                "name": "Aticco",
+                "apartments_count": 8,
+                "distance": 15.4
+              },
+              {
+                "name": "01",
+                "apartments_count": 4,
+                "distance": 15.4
+              }
+            ]
+          }
+        ],
+        "required": [
+          "neighborhood",
+          "apartments_height",
+          "buildings"
+        ],
+        "properties": {
+          "neighborhood": {
+            "$id": "#/items/anyOf/0/properties/neighborhood",
+            "type": "string",
+            "title": "The neighborhood schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+              "POBLENOU"
+            ]
+          },
+          "apartments_height": {
+            "$id": "#/items/anyOf/0/properties/apartments_height",
+            "type": "number",
+            "title": "The apartments_height schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0,
+            "examples": [
+              2.0
+            ]
+          },
+          "buildings": {
+            "$id": "#/items/anyOf/0/properties/buildings",
+            "type": "array",
+            "title": "The buildings schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "examples": [
+              [
+                {
+                  "name": "Aticco",
+                  "apartments_count": 8,
+                  "distance": 15.4
+                },
+                {
+                  "name": "01",
+                  "apartments_count": 4,
+                  "distance": 15.4
+                }
+              ]
+            ],
+            "additionalItems": true,
+            "items": {
+              "$id": "#/items/anyOf/0/properties/buildings/items",
+              "anyOf": [
+                {
+                  "$id": "#/items/anyOf/0/properties/buildings/items/anyOf/0",
+                  "type": "object",
+                  "title": "The first anyOf schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": {},
+                  "examples": [
+                    {
+                      "name": "Aticco",
+                      "apartments_count": 8,
+                      "distance": 15.4
+                    }
+                  ],
+                  "required": [
+                    "name",
+                    "apartments_count",
+                    "distance"
+                  ],
+                  "properties": {
+                    "name": {
+                      "$id": "#/items/anyOf/0/properties/buildings/items/anyOf/0/properties/name",
+                      "type": "string",
+                      "title": "The name schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": "",
+                      "examples": [
+                        "Aticco"
+                      ]
+                    },
+                    "apartments_count": {
+                      "$id": "#/items/anyOf/0/properties/buildings/items/anyOf/0/properties/apartments_count",
+                      "type": "integer",
+                      "title": "The apartments_count schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": 0,
+                      "examples": [
+                        8
+                      ]
+                    },
+                    "distance": {
+                      "$id": "#/items/anyOf/0/properties/buildings/items/anyOf/0/properties/distance",
+                      "type": "number",
+                      "title": "The distance schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": 0.0,
+                      "examples": [
+                        15.4
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    ]
+  }
+}
